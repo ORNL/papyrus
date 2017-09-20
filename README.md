@@ -4,10 +4,10 @@ Authors: Jungwon Kim (kimj@ornl.gov), Kittisak Sajjapongse (kittisaks@computer.o
 
 # How to build
 You can build Papyrus with CMake and Make:
-$ cmake <papyrus_source_directory> -DCMAKE_INSTALL_PREFIX=<papyrus_install_directory>
-$ make install
+
+    $ cmake <papyrus_source_directory> -DCMAKE_INSTALL_PREFIX=<papyrus_install_directory>
+    $ make install
 
 # Repository contents
-The public interface is in include/papyrus/*.h.
-
-The Key-Value Store in is kv/.
+- The public interface is in include/papyrus/*.h.
+- The Key-Value Store in is kv/.
