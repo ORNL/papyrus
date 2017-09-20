@@ -1,0 +1,64 @@
+#!/bin/bash -l
+
+#SBATCH -C haswell
+#SBATCH -p regular
+#SBATCH -N 1
+#SBATCH -t 04:00:00
+#SBATCH -L SCRATCH,project
+#SBATCH -J 1node
+#DW jobdw capacity=1TB access_mode=striped type=scratch
+
+module unload PrgEnv-cray
+module load PrgEnv-intel
+
+export MPICH_MAX_THREAD_SAFETY=multiple
+export MPICH_VERSION_DISPLAY=1
+
+KEYLEN=16
+VALLEN=(256 512 1024 2048 4096 8192 16384 32768 65536 131072 262144 524288 1048576)
+COUNT=1000
+
+export PAPYRUSKV_REPOSITORY=$DW_JOB_STRIPED/pkv_1node
+export PAPYRUSKV_DESTROY_REPOSITORY=1
+
+export PAPYRUSKV_GROUP_SIZE=1
+export PAPYRUSKV_CONSISTENCY=2
+export PAPYRUSKV_SSTABLE=2
+export PAPYRUSKV_CACHE_LOCAL=0
+export PAPYRUSKV_CACHE_REMOTE=0
+export PAPYRUSKV_BLOOM=1
+for i in "${VALLEN[@]}"; do
+    srun -n 32 -c 2 ./basic $KEYLEN $i $COUNT
+    sleep 5
+done
+
+export PAPYRUSKV_REPOSITORY=$SCRATCH/pkv_1node
+export PAPYRUSKV_DESTROY_REPOSITORY=1
+
+export PAPYRUSKV_GROUP_SIZE=1
+export PAPYRUSKV_CONSISTENCY=2
+export PAPYRUSKV_SSTABLE=2
+export PAPYRUSKV_CACHE_LOCAL=0
+export PAPYRUSKV_CACHE_REMOTE=0
+export PAPYRUSKV_BLOOM=1
+for i in "${VALLEN[@]}"; do
+    srun -n 32 -c 2 ./basic $KEYLEN $i $COUNT
+    sleep 5
+done
+
+export PAPYRUSKV_REPOSITORY=$GPFS/pkv_1node
+export PAPYRUSKV_DESTROY_REPOSITORY=1
+
+export PAPYRUSKV_GROUP_SIZE=1
+export PAPYRUSKV_CONSISTENCY=2
+export PAPYRUSKV_SSTABLE=2
+export PAPYRUSKV_CACHE_LOCAL=0
+export PAPYRUSKV_CACHE_REMOTE=0
+export PAPYRUSKV_BLOOM=1
+for i in "${VALLEN[@]}"; do
+    srun -n 32 -c 2 ./basic $KEYLEN $i $COUNT
+    sleep 5
+done
+
+
+# eof

@@ -1,0 +1,1 @@
+papyruskv_test(test08_protect)

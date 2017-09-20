@@ -1,0 +1,1 @@
+papyruskv_test(test06_signal)

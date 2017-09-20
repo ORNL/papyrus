@@ -1,0 +1,92 @@
+#!/usr/bin/env python
+
+import os
+import sys
+import struct
+import getopt
+
+def usage():
+    print("Usage: %s -d db [--info|--size|--list]" % os.path.basename(sys.argv[0]))
+    sys.exit(2)
+
+def info():
+    fd_toc = open(db + ".toc", 'rb')
+    nranks = struct.unpack('<i', fd_toc.read(4))[0]
+    print("nranks:%d" % nranks)
+    for rank in range (0, nranks):
+        sstables = struct.unpack('<Q', fd_toc.read(8))[0]
+        print("rank %d : sstables[%ld]" % (rank, sstables))
+    fd_toc.close()
+
+def size():
+    fd_toc = open(db + ".toc", 'rb')
+    nranks = struct.unpack('<i', fd_toc.read(4))[0]
+    for rank in range (0, nranks):
+        nkeys = 0
+        sstables = struct.unpack('<Q', fd_toc.read(8))[0]
+        for sid in range (0, sstables):
+            nkeys = nkeys + size_in_sstable(rank, sid)
+        if (nkeys): 
+            print("rank %d : nkeys[%d]" % (rank, nkeys))
+    fd_toc.close()
+
+def size_in_sstable(rank, sid):
+    fn_idx = "%s_%d_0_%d.idx" % (db, rank, sid + 1)
+    fd_idx = open(fn_idx, 'rb')
+    idxes = fd_idx.read()
+    st_idx = os.stat(fn_idx).st_size
+    nkeys = st_idx / 24
+    fd_idx.close()
+    return nkeys
+
+def items():
+    fd_toc = open(db + ".toc", 'rb')
+    nranks = struct.unpack('<i', fd_toc.read(4))[0]
+    print("{"),
+    for rank in range (0, nranks):
+        sstables = struct.unpack('<Q', fd_toc.read(8))[0]
+        for sid in range (0, sstables):
+            items_in_sstable(rank, sid)
+    print("}")
+    fd_toc.close()
+
+def items_in_sstable(rank, sid):
+    fn_idx = "%s_%d_0_%d.idx" % (db, rank, sid + 1)
+    fn_sst = "%s_%d_0_%d.sst" % (db, rank, sid + 1)
+    #print("=== %s:%s ===" % (fn_idx, fn_sst))
+    fd_idx = open(fn_idx, 'rb')
+    fd_sst = open(fn_sst, 'rb')
+    idxes = fd_idx.read()
+    st_idx = os.stat(fn_idx).st_size
+    for idx in range (0, st_idx / 24):
+        pair = struct.unpack('<QQB', idxes[idx * 24:idx * 24 + 17])
+        next_idx = 0
+        if ((idx + 1) * 24 < st_idx):
+            next_idx = struct.unpack('<Q', idxes[(idx + 1) * 24:(idx + 1) * 24 + 8])[0]
+        if (pair[2] == 1): continue
+        key = fd_sst.seek(pair[0])
+        key = fd_sst.read(pair[1])
+        val = fd_sst.read(next_idx - pair[0] - pair[1])
+        print("'%s': '%s'," % (key, val)),
+    fd_idx.close()
+    fd_sst.close()
+
+try: opts, args = getopt.getopt(sys.argv[1:], "d:islh", ["database=", "info", "size", "list", "help"])
+except getopt.GetoptError: usage()
+
+db = ""
+
+for opt, arg in opts:
+    if opt in ("-d", "--database"):
+        db = arg
+    elif opt in ("-i", "--info"):
+        info()
+    elif opt in ("-s", "--size"):
+        size()
+    elif opt in ("-l", "--list"):
+        items()
+    elif opt in ("-h", "--help"):
+        usage()
+
+if db == "": usage()
+
