@@ -9,6 +9,15 @@ Papyrus is a programming system that provides features for scalable, aggregate, 
 
 ## Installation
 
+To compile the code, CMake reads a user-defined configuration file stored in conf/ directory. If the target system is not OLCF's Summitdev, NERSC's Cori, nor TACC's Stampede2, then one needs first to modify the conf/default.cmake file accordingly.
+
+    set(CMAKE_C_COMPILER "mpicc")
+    set(CMAKE_CXX_COMPILER "mpic++")
+    set(CMAKE_C_FLAGS "")
+    set(CMAKE_CXX_FLAGS "-O2 -std=c++11")
+    set(MPIEXEC "mpirun")
+    set(MPIEXEC_NUMPROC_FLAG "-n")
+
 You can build Papyrus with CMake and Make:
 
     $ git clone https://code.ornl.gov/eck/papyrus.git
@@ -18,8 +27,6 @@ You can build Papyrus with CMake and Make:
     $ cmake -DCMAKE_INSTALL_PREFIX=<install_dir> ..
     $ make
     $ make install
-
-To compile the code, CMake reads a user-defined configuration file stored in conf/ directory. If the target system is not OLCF's Summitdev, NERSC's Cori, nor TACC's Stampede2, then one needs first to modify the conf/default.cmake file accordingly.
 
 ### Running tests
 
