@@ -9,7 +9,12 @@ Papyrus is a programming system that provides features for scalable, aggregate, 
 
 ## Installation
 
-To compile the code, CMake reads a user-defined configuration file stored in conf/ directory. If the target system is not OLCF's Summitdev, NERSC's Cori, nor TACC's Stampede2, then one needs first to modify the conf/default.cmake file accordingly.
+You can download Papyrus from the code.ornl.gov.
+
+    $ git clone https://code.ornl.gov/eck/papyrus.git
+    $ cd papyrus
+
+To compile the code, CMake reads a user-defined configuration file stored in conf/ directory. One needs first to modify the conf/default.cmake file accordingly. The sample configuration files for OLCF's Summitdev, NERSC's Cori, TACC's Stampede2, and ALCF's Theta are included in the directory.
 
     set(CMAKE_C_COMPILER "mpicc")
     set(CMAKE_CXX_COMPILER "mpic++")
@@ -20,8 +25,6 @@ To compile the code, CMake reads a user-defined configuration file stored in con
 
 You can build Papyrus with CMake and Make:
 
-    $ git clone https://code.ornl.gov/eck/papyrus.git
-    $ cd papyrus
     $ mkdir build
     $ cd build
     $ cmake -DCMAKE_INSTALL_PREFIX=<install_dir> ..
@@ -29,6 +32,10 @@ You can build Papyrus with CMake and Make:
     $ make install
 
 ### Running tests
+
+For the Cray MPI Library, an environment variable MPICH\_MAX\_THREAD\_SAFETY has to be set to multiple.
+
+    $ export MPICH_MAX_THREAD_SAFETY=multiple
 
 The project's test suite can be run by executing:
 
