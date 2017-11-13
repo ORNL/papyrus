@@ -52,4 +52,4 @@ The project's test suite can be run by executing:
 To cite Papyrus, please use the following papers:
 
 - Jungwon Kim, Kittisak Sajjapongse, Seyong Lee, and Jeffrey S. Vetter. "Design and Implementation of Papyrus: Parallel Aggregate Persistent Storage". IPDPS 2017, DOI: [10.1109/IPDPS.2017.72](https://doi.org/10.1109/IPDPS.2017.72)
-- Jungwon Kim, Seyong Lee, and Jeffrey S. Vetter. "PapyrusKV: A High-Performance Parallel Key-Value Store for Distributed NVM Architectures". SC 2017. DOI: 10.1145/3126908.3126943
+- Jungwon Kim, Seyong Lee, and Jeffrey S. Vetter. "PapyrusKV: A High-Performance Parallel Key-Value Store for Distributed NVM Architectures". SC 2017. DOI: [10.1145/3126908.3126943](https://doi.org/10.1145/3126908.3126943)
