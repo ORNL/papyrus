@@ -1,6 +1,0 @@
-set(CMAKE_C_COMPILER "CC")
-set(CMAKE_CXX_COMPILER "CC")
-set(CMAKE_C_FLAGS "-craympich-mt")
-set(CMAKE_CXX_FLAGS "-O2 -std=c++11 -craympich-mt")
-set(MPIEXEC "srun")
-set(MPIEXEC_NUMPROC_FLAG "-n")

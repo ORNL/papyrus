@@ -5,35 +5,28 @@ Papyrus is a programming system that provides features for scalable, aggregate, 
 
 - C++11 compiler
 - MPI library supporting MPI\_THREAD\_MULTIPLE
-- CMake (>=2.8)
+- CMake (>=3.8)
 
 ## Installation
 
-You can download Papyrus from the code.ornl.gov.
+You can download Papyrus from the code.ornl.gov:
 
     $ git clone https://code.ornl.gov/eck/papyrus.git
     $ cd papyrus
-
-To compile the code, CMake reads a user-defined configuration file stored in conf/ directory. One needs first to modify the conf/default.cmake file accordingly. The sample configuration files for OLCF's Summitdev, NERSC's Cori, TACC's Stampede2, and ALCF's Theta are included in the directory.
-
-    set(CMAKE_C_COMPILER "mpicc")
-    set(CMAKE_CXX_COMPILER "mpic++")
-    set(CMAKE_C_FLAGS "")
-    set(CMAKE_CXX_FLAGS "-O2 -std=c++11")
-    set(MPIEXEC "mpirun")
-    set(MPIEXEC_NUMPROC_FLAG "-n")
 
 You can build Papyrus with CMake and Make:
 
     $ mkdir build
     $ cd build
-    $ cmake -DCMAKE_INSTALL_PREFIX=<install_dir> ..
+    $ cmake .. -DCMAKE_INSTALL_PREFIX=<install_dir>
+      or if you want to run tests after build
+    $ cmake .. -DCMAKE_INSTALL_PREFIX=<install_dir> -DMPIEXEC=<mpiexec_path> -DMPIEXEC_NUMPROC_FLAG=<np_flag>
     $ make
     $ make install
 
 ### Running tests
 
-For the Cray MPI Library, an environment variable MPICH\_MAX\_THREAD\_SAFETY has to be set to multiple.
+For the Cray MPI Library, an environment variable MPICH\_MAX\_THREAD\_SAFETY has to be set to multiple:
 
     $ export MPICH_MAX_THREAD_SAFETY=multiple
 
@@ -45,7 +38,6 @@ The project's test suite can be run by executing:
 
 - The public interface is in include/papyrus/\*.h.
 - The Key-Value Store is in kv/.
-- The compiler and MPI information for CMake is in conf/.
 
 ## References
 
