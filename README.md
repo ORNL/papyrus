@@ -9,7 +9,7 @@ Papyrus is a programming system that provides features for scalable, aggregate, 
 
 ## Installation
 
-You can download Papyrus from the code.ornl.gov:
+You can download Papyrus from code.ornl.gov:
 
     $ git clone https://code.ornl.gov/eck/papyrus.git
     $ cd papyrus
