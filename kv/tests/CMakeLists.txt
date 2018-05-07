@@ -2,7 +2,7 @@ include_directories(${PROJECT_SOURCE_DIR}/include)
 
 macro(papyruskv_test arg)
     add_executable(kv.${arg} ${arg}.c)
-    target_link_libraries(kv.${arg} papyruskv)
+    target_link_libraries(kv.${arg} papyruskv pthread)
     add_test(kv.${arg} ${MPIEXEC} ${MPIEXEC_NUMPROC_FLAG} 4 ./kv.${arg})
     set_tests_properties(kv.${arg} PROPERTIES FAIL_REGULAR_EXPRESSION "FAILED")
 endmacro(papyruskv_test)
