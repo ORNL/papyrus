@@ -33,5 +33,6 @@ add_library(papyruskv ${PAPYRUSKV_SOURCES})
 install(TARGETS papyruskv DESTINATION lib)
 
 if(PAPYRUS_USE_FORTRAN)
-    install(FILES ${PROJECT_BINARY_DIR}/kv/src/papyrus.mod DESTINATION include)
+    install(DIRECTORY ${PROJECT_BINARY_DIR}/kv/src/ DESTINATION include
+            FILES_MATCHING PATTERN "*.mod")
 endif()
