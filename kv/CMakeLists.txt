@@ -1,5 +1,5 @@
 add_subdirectory(src)
-if(!PAPYRUS_BUILD_FROM_SPACK)
+if(NOT PAPYRUS_BUILD_WITH_SPACK)
 add_subdirectory(tests)
 endif()
 add_subdirectory(bin)
