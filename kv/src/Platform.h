@@ -26,7 +26,7 @@ public:
     int Put(int dbid, const char* key, size_t keylen, const char* val, size_t vallen);
     int Get(int dbid, const char* key, size_t keylen, char** val, size_t* vallen, papyruskv_pos_t* pos);
     int Delete(int dbid, const char* key, size_t keylen);
-    int Free(void* val);
+    int Free(char** val);
     int Fence(int dbid, int level);
     int Barrier(int dbid, int level);
     int SignalNotify(int signum, int* ranks, int count);

@@ -13,7 +13,7 @@ public:
     ~Pool();
 
     char* AllocVal(size_t vallen);
-    void FreeVal(void* val);
+    void FreeVal(char** val);
 
 private:
     Platform* platform_;

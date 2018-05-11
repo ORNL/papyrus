@@ -36,7 +36,7 @@ int papyruskv_delete(int db, const char* key, size_t keylen) {
     return Platform::GetPlatform()->Delete(db, key, keylen);
 }
 
-int papyruskv_free(void* val) {
+int papyruskv_free(char** val) {
     return Platform::GetPlatform()->Free(val);
 }
 

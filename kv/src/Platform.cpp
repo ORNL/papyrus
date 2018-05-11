@@ -156,7 +156,7 @@ int Platform::Delete(int dbid, const char* key, size_t keylen) {
     return GetDB(dbid)->Delete(key, keylen);
 }
 
-int Platform::Free(void* val) {
+int Platform::Free(char** val) {
     pool_->FreeVal(val);
     return PAPYRUSKV_OK;
 }

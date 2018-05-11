@@ -20,6 +20,14 @@ endif()
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
+set(PAPYRUS_USE_FORTRAN ON CACHE BOOL "Enable support for Fortran 90")
+MESSAGE (STATUS "PAPYRUS_USE_FORTRAN ${PAPYRUS_USE_FORTRAN}")
+
+if(PAPYRUS_USE_FORTRAN)
+    enable_language(Fortran)
+    MESSAGE (STATUS "CMAKE_Fortran_COMPILER ${CMAKE_Fortran_COMPILER}")
+endif()
+
 include(CTest)
 
 add_subdirectory(include)
