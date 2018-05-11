@@ -14,8 +14,9 @@ char* Pool::AllocVal(size_t vallen) {
     return new char[vallen];
 }
 
-void Pool::FreeVal(void* val) {
-    delete[] reinterpret_cast<char *>(val);
+void Pool::FreeVal(char** val) {
+    delete[] *val;
+    *val = NULL;
 }
 
 } /* namespace papyruskv */

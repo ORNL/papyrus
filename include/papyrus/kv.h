@@ -53,7 +53,7 @@ extern int papyruskv_put(int db, const char* key, size_t keylen, const char* val
 extern int papyruskv_get(int db, const char* key, size_t keylen, char** val, size_t* vallen);
 extern int papyruskv_get_pos(int db, const char* key, size_t keylen, char** val, size_t* vallen, papyruskv_pos_t* pos);
 extern int papyruskv_delete(int db, const char* key, size_t keylen);
-extern int papyruskv_free(void* val);
+extern int papyruskv_free(char** val);
 extern int papyruskv_fence(int db, int level);
 extern int papyruskv_barrier(int db, int level);
 extern int papyruskv_signal_notify(int signum, int* ranks, int count);
