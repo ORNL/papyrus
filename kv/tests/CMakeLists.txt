@@ -8,11 +8,12 @@ macro(papyruskv_test arg)
 endmacro(papyruskv_test)
 
 macro(papyruskv_test_fortran arg)
-    include_directories(${PROJECT_BINARY_DIR}/include)
+    include_directories(${PROJECT_SOURCE_DIR}/kv/src)
     add_executable(kv.${arg} ${arg}.f90)
     target_link_libraries(kv.${arg} papyruskv pthread stdc++)
     add_test(kv.${arg} ${MPIEXEC} ${MPIEXEC_NUMPROC_FLAG} 4 ./kv.${arg})
     set_tests_properties(kv.${arg} PROPERTIES FAIL_REGULAR_EXPRESSION "FAILED")
+    set(CMAKE_CXX_COMPILER "${CMAKE_Fortran_COMPILER}") # HACK
 endmacro(papyruskv_test_fortran)
 
 add_subdirectory(01_open_close)
