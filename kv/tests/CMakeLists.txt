@@ -13,7 +13,11 @@ macro(papyruskv_test_fortran arg)
     target_link_libraries(kv.${arg} papyruskv pthread stdc++)
     add_test(kv.${arg} ${MPIEXEC} ${MPIEXEC_NUMPROC_FLAG} 4 ./kv.${arg})
     set_tests_properties(kv.${arg} PROPERTIES FAIL_REGULAR_EXPRESSION "FAILED")
-    set(CMAKE_CXX_COMPILER "${CMAKE_Fortran_COMPILER}") # HACK
+    if("${CMAKE_Fortran_COMPILER_ID}" STREQUAL "XL")
+        target_link_libraries(kv.${arg} papyruskv pthread stdc++ mpi_ibm_mpifh)
+    else()
+        set(CMAKE_CXX_COMPILER "${CMAKE_Fortran_COMPILER}")
+    endif()
 endmacro(papyruskv_test_fortran)
 
 add_subdirectory(01_open_close)
