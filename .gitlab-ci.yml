@@ -9,6 +9,6 @@ papyrus:
   script:
     - mkdir build
     - cd build
-    - cmake ..
+    - cmake .. -DPAPYRUS_USE_FORTRAN=ON
     - VERBOSE=1 make
     - ctest -V
