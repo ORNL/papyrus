@@ -38,7 +38,7 @@ int Platform::Init(int* argc, char*** argv, const char* repository) {
 
     MPI_Comm_dup(MPI_COMM_WORLD, &mpi_comm_ext_);
 
-    memset(db_, PAPYRUSKV_MAX_DB * sizeof(DB*), 0);
+    memset(db_, 0, PAPYRUSKV_MAX_DB * sizeof(DB*));
 
     if (repository[0] == '$') {
         char* env = getenv(repository + 1);
