@@ -9,9 +9,9 @@ Papyrus is a programming system that provides features for scalable, aggregate, 
 
 ## Installation
 
-You can download Papyrus from code.ornl.gov:
+You can download Papyrus from GitHub:
 
-    $ git clone https://code.ornl.gov/eck/papyrus.git
+    $ git clone https://github.com/ORNL/papyrus.git
     $ cd papyrus
 
 You can build Papyrus with CMake and Make:
@@ -20,8 +20,8 @@ You can build Papyrus with CMake and Make:
     $ cd build
     $ cmake .. -DCMAKE_INSTALL_PREFIX=<install_dir>
       or if you want to run tests after build
-    $ cmake .. -DCMAKE_INSTALL_PREFIX=<install_dir> -DMPIEXEC=<mpiexec_path> -DMPIEXEC_NUMPROC_FLAG=<np_flag>
-    $ make
+    $ cmake .. -DCMAKE_INSTALL_PREFIX=<install_dir> \
+               -DMPIEXEC=<mpiexec_path> -DMPIEXEC_NUMPROC_FLAG=<np_flag>
     $ make install
 
 ### Running tests
@@ -33,6 +33,14 @@ For the Cray MPI Library, an environment variable MPICH\_MAX\_THREAD\_SAFETY has
 The project's test suite can be run by executing:
 
     $ make test (or use 'ctest -V' for verbose test output)
+
+### Docker images
+
+To use the pre-built images, you can pull from Docker Hub:
+
+    docker pull oakridgelab/papyrus
+
+Papyrus is installed in /opt/papyrus/
 
 ## Repository contents
 
