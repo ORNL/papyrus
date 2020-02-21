@@ -9,7 +9,7 @@ Papyrus is a programming system that provides features for scalable, aggregate, 
 
 ## Installation
 
-You can download Papyrus from GitHub:
+You can download the Papyrus source code from GitHub:
 
     $ git clone https://github.com/ORNL/papyrus.git
     $ cd papyrus
@@ -40,7 +40,7 @@ To use the pre-built images, you can pull from Docker Hub:
 
     docker pull oakridgelab/papyrus
 
-Papyrus is installed in /opt/papyrus/
+The Papyrus source code is installed in /opt/papyrus/.
 
 ## Repository contents
 
