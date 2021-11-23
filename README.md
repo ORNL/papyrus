@@ -34,14 +34,6 @@ The project's test suite can be run by executing:
 
     $ make test (or use 'ctest -V' for verbose test output)
 
-### Docker images
-
-To use the pre-built images, you can pull from Docker Hub:
-
-    docker pull oakridgelab/papyrus
-
-The Papyrus source code is installed in /opt/papyrus/.
-
 ## Repository contents
 
 - The public interface is in include/papyrus/\*.h.
@@ -51,5 +43,7 @@ The Papyrus source code is installed in /opt/papyrus/.
 
 To cite Papyrus, please use the following papers:
 
-- Jungwon Kim, Kittisak Sajjapongse, Seyong Lee, and Jeffrey S. Vetter. "Design and Implementation of Papyrus: Parallel Aggregate Persistent Storage". IPDPS 2017, DOI: [10.1109/IPDPS.2017.72](https://doi.org/10.1109/IPDPS.2017.72)
 - Jungwon Kim, Seyong Lee, and Jeffrey S. Vetter. "PapyrusKV: A High-Performance Parallel Key-Value Store for Distributed NVM Architectures". SC 2017. DOI: [10.1145/3126908.3126943](https://doi.org/10.1145/3126908.3126943)
+- Jungwon Kim, Kittisak Sajjapongse, Seyong Lee, and Jeffrey S. Vetter. "Design and Implementation of Papyrus: Parallel Aggregate Persistent Storage". IPDPS 2017, DOI: [10.1109/IPDPS.2017.72](https://doi.org/10.1109/IPDPS.2017.72)
+- Jungwon Kim and Jeffrey S. Vetter. "Implementing Efficient Data Compression and Encryption in a Persistent Key-Value Store for HPC". IJHPCA 2019. DOI: [10.1117/1094342019847264](https://doi.org/10.1177/1094342019847264)
+

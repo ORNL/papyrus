@@ -1,3 +1,5 @@
+option(BUILD_SHARED_LIBS "Build shared libs" ON)
+
 include_directories(${PROJECT_SOURCE_DIR}/include)
 
 set(PAPYRUSKV_SOURCES
